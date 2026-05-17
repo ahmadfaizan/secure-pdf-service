@@ -139,15 +139,18 @@
     }
     .btn-secondary:hover { background: var(--gold); color: var(--dark); transform: translateY(-2px); }
 
-    .hero-info {
-      margin-top: 3rem;
-      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+    .hero-pills {
+      margin-top: 2.5rem;
+      display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap;
     }
-    .hero-info-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      color: #9a8070; font-size: 0.85rem;
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+      color: #c8b89a; font-size: 0.8rem; font-weight: 500;
+      border-radius: 50px; padding: 0.4rem 0.9rem;
+      backdrop-filter: blur(4px);
     }
-    .hero-info-item svg { color: var(--gold); flex-shrink: 0; }
+    .hero-pill svg { color: var(--gold); flex-shrink: 0; }
 
     /* ─── SECTION BASE ────────────────────────────────────────────── */
     section { padding: 5rem 1.5rem; }
@@ -425,6 +428,75 @@
       .menu-grid { grid-template-columns: 1fr; }
     }
 
+    /* ─── EVENTS BANNER ──────────────────────────────────────────── */
+    #events { background: var(--dark); padding: 5rem 1.5rem; }
+
+    .events-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+
+    .event-card {
+      border-radius: 20px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .event-card.dine-in {
+      background: linear-gradient(135deg, #2d1205 0%, #4a1e08 100%);
+    }
+    .event-card.party {
+      background: linear-gradient(135deg, #1a1040 0%, #2d1a6e 100%);
+    }
+
+    .event-card-icon {
+      font-size: 2.8rem; margin-bottom: 1.2rem; display: block;
+    }
+
+    .event-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--white); font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .event-card p {
+      color: #a09080; font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem;
+    }
+
+    .event-card.party p { color: #9090c0; }
+
+    .event-highlights {
+      display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.8rem;
+    }
+    .event-highlight {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: #c8b89a; font-size: 0.84rem;
+    }
+    .event-highlight::before {
+      content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0;
+    }
+    .event-card.party .event-highlight { color: #b0b0e0; }
+    .event-card.party .event-highlight::before { color: #a080ff; }
+
+    .event-btn {
+      display: inline-block; padding: 0.7rem 1.6rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.88rem; text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .event-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+    .event-card.dine-in .event-btn { background: var(--brand); color: var(--white); }
+    .event-card.party   .event-btn { background: #7c4dff; color: var(--white); }
+
+    .event-card-glow {
+      position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      pointer-events: none;
+    }
+    .dine-in .event-card-glow { background: radial-gradient(circle, rgba(192,57,43,0.25) 0%, transparent 70%); }
+    .party   .event-card-glow { background: radial-gradient(circle, rgba(124,77,255,0.25) 0%, transparent 70%); }
+
+    @media (max-width: 768px) {
+      .events-grid { grid-template-columns: 1fr; }
+    }
+
     /* scroll reveal */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
     .reveal.visible { opacity: 1; transform: none; }
@@ -437,6 +509,7 @@
   <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
   <a href="#about"   onclick="closeMobileMenu()">About</a>
   <a href="#menu"    onclick="closeMobileMenu()">Menu</a>
+  <a href="#events"  onclick="closeMobileMenu()">Events</a>
   <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
 </div>
@@ -457,6 +530,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#menu">Menu</a></li>
+    <li><a href="#events">Events</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -478,21 +552,25 @@
     <p class="hero-tagline">190 Kirkbride Road, Mangere, Auckland</p>
     <div class="hero-ctas">
       <a href="#menu" class="btn-primary">Explore Our Menu</a>
-      <a href="#contact" class="btn-secondary">Find Us</a>
+      <a href="#events" class="btn-secondary">Book a Party</a>
     </div>
-    <div class="hero-info">
-      <div class="hero-info-item">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Mangere, Auckland
-      </div>
-      <div class="hero-info-item">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 5v5l4 2"/></svg>
+    <div class="hero-pills">
+      <span class="hero-pill">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        Dine In Available
+      </span>
+      <span class="hero-pill">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Private Parties
+      </span>
+      <span class="hero-pill">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 5v5l4 2"/></svg>
         Open Daily
-      </div>
-      <div class="hero-info-item">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </span>
+      <span class="hero-pill">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Halal Certified
-      </div>
+      </span>
     </div>
   </div>
 </section>
@@ -521,9 +599,14 @@
         <p>Extensive vegetarian menu featuring classic North Indian dishes, paneer delicacies, and lentil specialties.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">👨‍👩‍👧</div>
-        <h3>Family Dining</h3>
-        <p>A welcoming space for the whole family — from a kids' menu to generous sharing platters for the table.</p>
+        <div class="feature-icon">🍽️</div>
+        <h3>Dine In</h3>
+        <p>Enjoy a relaxed sit-down meal in our warm, welcoming dining room. Perfect for a casual lunch or a special dinner out.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎉</div>
+        <h3>Private Parties</h3>
+        <p>Celebrating a birthday, wedding, or corporate event? We host private parties with customised menus and dedicated service.</p>
       </div>
     </div>
   </div>
@@ -1081,6 +1164,47 @@
       <div class="gallery-card" style="--color-a:#4A2C8B;--color-b:#7C4CBC">
         <span>🫓</span><div class="gc-label">Fresh Naan</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ──────────────────────────────────────────────────────────── -->
+<section id="events">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">Experiences</p>
+    <h2 class="section-title" style="color:var(--white)">Dine In &amp; Private Parties</h2>
+    <div class="divider"></div>
+    <p class="section-desc" style="color:#9a8070;margin-bottom:3rem">Whether you're joining us for a quiet meal or planning a celebration, Mezbaan has you covered.</p>
+    <div class="events-grid reveal">
+
+      <div class="event-card dine-in">
+        <div class="event-card-glow"></div>
+        <span class="event-card-icon">🍽️</span>
+        <h3>Dine In</h3>
+        <p>Settle in and savour every bite in our warm, welcoming dining room. A perfect setting for date nights, family meals, or a satisfying solo lunch.</p>
+        <div class="event-highlights">
+          <div class="event-highlight">Comfortable sit-down dining</div>
+          <div class="event-highlight">Full menu available — eat in</div>
+          <div class="event-highlight">Family &amp; group friendly</div>
+          <div class="event-highlight">Kids menu available</div>
+        </div>
+        <a href="#contact" class="event-btn">Find Us &amp; Visit</a>
+      </div>
+
+      <div class="event-card party">
+        <div class="event-card-glow"></div>
+        <span class="event-card-icon">🎉</span>
+        <h3>Private Parties</h3>
+        <p>Make your next celebration unforgettable. We host birthdays, weddings, engagements, corporate events, and cultural gatherings with personalised menus and attentive service.</p>
+        <div class="event-highlights">
+          <div class="event-highlight">Customised party menus</div>
+          <div class="event-highlight">Birthdays, weddings &amp; more</div>
+          <div class="event-highlight">Corporate &amp; community events</div>
+          <div class="event-highlight">Dedicated event service</div>
+        </div>
+        <a href="#contact" class="event-btn">Enquire Now</a>
+      </div>
+
     </div>
   </div>
 </section>
