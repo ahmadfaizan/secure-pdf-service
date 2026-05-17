@@ -301,18 +301,21 @@
 
     .gallery-card {
       border-radius: 14px; overflow: hidden;
-      aspect-ratio: 1; background: linear-gradient(135deg, var(--color-a), var(--color-b));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem; position: relative;
+      aspect-ratio: 1; position: relative;
       transition: transform .25s;
+      background: #1a0a04;
     }
     .gallery-card:hover { transform: scale(1.03); }
-    .gallery-card span { position: relative; z-index: 1; }
+    .gallery-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .4s;
+    }
+    .gallery-card:hover img { transform: scale(1.08); }
     .gallery-card .gc-label {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.65));
-      color: var(--white); font-size: 0.8rem; font-weight: 600;
-      padding: 1rem 0.8rem 0.8rem; text-align: center;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: var(--white); font-size: 0.85rem; font-weight: 600;
+      padding: 1.5rem 0.8rem 0.8rem; text-align: center;
     }
 
     /* ─── CONTACT ─────────────────────────────────────────────────── */
@@ -1146,23 +1149,29 @@
     <div class="divider"></div>
     <p class="section-desc">A glimpse of the vibrant colours and rich textures that make up our cuisine.</p>
     <div class="gallery-grid reveal">
-      <div class="gallery-card" style="--color-a:#8B1A1A;--color-b:#D4480A">
-        <span>🍛</span><div class="gc-label">Butter Chicken</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/The_Original_Butter_Chicken.jpg/600px-The_Original_Butter_Chicken.jpg" alt="Butter Chicken" loading="lazy" />
+        <div class="gc-label">Butter Chicken</div>
       </div>
-      <div class="gallery-card" style="--color-a:#2C5F2E;--color-b:#4A8C4D">
-        <span>🥗</span><div class="gc-label">Palak Paneer</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Shahi_paneer_and_palak_paneer.JPG/600px-Shahi_paneer_and_palak_paneer.JPG" alt="Palak Paneer" loading="lazy" />
+        <div class="gc-label">Palak Paneer</div>
       </div>
-      <div class="gallery-card" style="--color-a:#8B6914;--color-b:#C8941D">
-        <span>🍚</span><div class="gc-label">Biryani</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Chicken_Hyderabadi_Biryani.JPG/600px-Chicken_Hyderabadi_Biryani.JPG" alt="Biryani" loading="lazy" />
+        <div class="gc-label">Biryani</div>
       </div>
-      <div class="gallery-card" style="--color-a:#5C1A1A;--color-b:#9C3A1A">
-        <span>🍢</span><div class="gc-label">Tandoori Platter</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tandoori_Chicken_1.JPG/600px-Tandoori_Chicken_1.JPG" alt="Tandoori Chicken" loading="lazy" />
+        <div class="gc-label">Tandoori Chicken</div>
       </div>
-      <div class="gallery-card" style="--color-a:#1A3A5C;--color-b:#1A6A9C">
-        <span>🍤</span><div class="gc-label">Prawn Malabari</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Prawn_chettinad_curry.JPG/600px-Prawn_chettinad_curry.JPG" alt="Prawn Curry" loading="lazy" />
+        <div class="gc-label">Prawn Curry</div>
       </div>
-      <div class="gallery-card" style="--color-a:#4A2C8B;--color-b:#7C4CBC">
-        <span>🫓</span><div class="gc-label">Fresh Naan</div>
+      <div class="gallery-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Garlic_Naan.JPG/600px-Garlic_Naan.JPG" alt="Garlic Naan" loading="lazy" />
+        <div class="gc-label">Garlic Naan</div>
       </div>
     </div>
   </div>
